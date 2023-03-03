@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.chatapp.R;
 import com.example.chatapp.databinding.RowConversationBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import Activities.ChatActivity;
+import Model.User;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder> {
 
@@ -44,11 +48,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
         User user = users.get(position);
 
-        String senderId = FirebaseAuth.getInstance().getUid();
 
+
+        String senderId = FirebaseAuth.getInstance().getUid();
         String senderRoom = senderId + user.getUid();
 
-    /*    FirebaseDatabase.getInstance().getReference()
+        FirebaseDatabase.getInstance().getReference()
                 .child("chats")
                 .child(senderRoom)
                 .addValueEventListener(new ValueEventListener() {
@@ -57,8 +62,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
                         if(snapshot.exists()) {
                             String lastMsg = snapshot.child("lastMsg").getValue(String.class);
                             long time = snapshot.child("lastMsgTime").getValue(Long.class);
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
-                            holder.binding.msgTime.setText(dateFormat.format(new Date(time)));
+                          SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                           holder.binding.msgTime.setText(dateFormat.format(new Date(time)));
                             holder.binding.lastMsg.setText(lastMsg);
                         } else {
                             holder.binding.lastMsg.setText("Tap to chat");
@@ -69,7 +74,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });*/
+                });
 
 
         holder.binding.username.setText(user.getName());

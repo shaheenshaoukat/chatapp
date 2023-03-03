@@ -1,9 +1,9 @@
-package com.example.chatapp;
+package Model;
 
 public class Message {
     private String messageId, message, senderId, imageUrl;
     private long timestamp;
-    private int feeling;
+    private int feeling=-1;
 
     public Message() {
     }
